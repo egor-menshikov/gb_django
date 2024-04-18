@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from lect_2_app.models import User
+from ...models import User
 
 
 class Command(BaseCommand):
@@ -8,10 +8,27 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         user = User(
-            name='Egor',
-            email='r@g.com',
+            name='Trinity',
+            email='trinity@zion.com',
             password='secret',
-            age=38,
+            age=33,
         )
         user.save()
+
+        user = User(
+            name='Neo',
+            email='neo@zion.com',
+            password='imsocool',
+            age=31,
+        )
+        user.save()
+
+        user = User(
+            name='Morpheus',
+            email='boss@zion.com',
+            password='1234',
+            age=52,
+        )
+        user.save()
+
         self.stdout.write(f'{user}')
