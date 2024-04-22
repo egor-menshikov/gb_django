@@ -1,8 +1,9 @@
-
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
+
+from .models import Author, Post
 
 
 # Create your views here.
@@ -11,6 +12,21 @@ from django.views.generic import TemplateView
 class IndexView(View):
     def get(self, request):
         return render(request, 'lect_3_app/index.html')
+
+
+class AuthorPostsView(View):
+    def get(self, request, author_id):
+        author = get_object_or_404(Author, pk=author_id)
+        posts = Post.objects.filter(author=author).order_by('-id')[:5]
+        return render(
+            request, 'lect_3_app/author_posts.html', {'author': author, 'posts': posts}
+        )
+
+
+class PostFullView(View):
+    def get(self, request, post_id):
+        post = get_object_or_404(Post, pk=post_id)
+        return render(request, 'lect_3_app/post_full.html', {'post': post})
 
 
 class TemplFor(TemplateView):
