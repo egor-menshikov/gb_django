@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views import View
@@ -9,8 +10,7 @@ from django.views.generic import TemplateView
 
 class IndexView(View):
     def get(self, request):
-        context = {'name': 'Egor'}
-        return render(request, 'lect_3_app/my_template.html', context)
+        return render(request, 'lect_3_app/index.html')
 
 
 class TemplFor(TemplateView):
